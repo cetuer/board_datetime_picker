@@ -382,28 +382,26 @@ class ItemWidgetState extends State<ItemWidget>
                     ),
                   ),
                 ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: widget.inputable
-                          ? () {
-                              setState(() {
-                                isTextEditing = true;
-                              });
-                              Future.delayed(const Duration(milliseconds: 10))
-                                  .then((_) {
-                                widget.option.focusNode.requestFocus();
-                              });
-                            }
-                          : null,
-                      borderRadius: borderRadius,
-                      child: SizedBox(
-                        height: itemSize,
-                        width: double.infinity,
-                      ),
-                    ),
+                Visibility(
+                  visible: widget.inputable,
+                  maintainState: widget.inputable,
+                  child: _centerAlign(
+                    Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: widget.inputable
+                              ? () {
+                                  setState(() {
+                                    isTextEditing = true;
+                                  });
+                                  Future.delayed(const Duration(milliseconds: 10))
+                                      .then((_) {
+                                    widget.option.focusNode.requestFocus();
+                                  });
+                                }
+                              : null,
+                          borderRadius: borderRadius,
+                        )),
                   ),
                 ),
                 Visibility(
